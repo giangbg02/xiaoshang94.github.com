@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{ padding:0; margin:0;}
+body{ font-size:12px; font-family:"宋体";}
+a{ text-decoration:none; color:#000;}
+li,dl,dt,dd,ul{ list-style:none;}
+h1,h2,h3,h4,h5,h6,strong,b{ font-weight:normal; font-size:100%;}
+i,em{ font-style:normal;}
+img{vertical-align:top;}
+a img{ border:none;}
+.clearfix:after{ display:block; clear:both; content:'';}
+.clearfix{ zoom:1;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
