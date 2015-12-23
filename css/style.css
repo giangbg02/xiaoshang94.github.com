@@ -1,5 +1,6 @@
 html{height:100%;}
 body{height:100%;}
+::selection{background:#B9BFCA; color: #fff;}
 /*白边*/
 .bb{height:52px;}
 /*第一部分*/   
