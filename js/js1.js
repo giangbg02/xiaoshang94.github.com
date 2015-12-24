@@ -17,26 +17,21 @@ window.onload=function(){
 		}
 
 		// 轮播淡入淡出
-	function picture_pre(url) {
-		var img = new Image();
-		for(var i=0; i<url.length; i++){
-			img.src = url[i];	
+	function picture_pre(arr){
+		var newimages=[];
+		var arr=(typeof arr!="object")? [arr] : arr;  //确保参数总是数组
+		for (var i=0; i<arr.length; i++){
+			newimages[i]=new Image();
+			newimages[i].src=arr[i]
 		}
-		if(img.complete){
-			fade_in(); //自己实验：兼容火狐谷歌...... ...... 
+		if(newimages.length==arr.length){
+			fade_in();	
 		}
-		else {
-			img.onload = function() { 
-				fade_in(); //自己实验：兼容IE浏览器....... .......
-			};
-		}
-		
-		
-	}	
-	
-	picture_pre(['img/mg0c.jpg','img/mg1c.jpg','img/mg4c.jpg','img/mg2c.jpg','img/mg10c.jpg']) 
-	
-		function fade_in(){
+	}
+
+	 picture_pre(['img/mg0c.jpg','img/mg1c.jpg','img/mg4c.jpg','img/mg2c.jpg','img/mg10c.jpg']) 
+	 
+	function fade_in(){
 			var oDiv=document.getElementById('b2-r');
 		var oImg=oDiv.getElementsByTagName('img')[0];
 		var now=0;
@@ -156,9 +151,12 @@ window.onload=function(){
 					
 					
 		};
-	}	
+
+}
 		
-	 
+
+	
+
 		//标题栏运动
 		var oDl=document.getElementById('b1-dl');
 		var aDd=oDl.children;
