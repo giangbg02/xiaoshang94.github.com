@@ -19,6 +19,9 @@ window.onload=function(){
 		// 轮播淡入淡出
 	function picture_pre(url) {
 		var img = new Image();
+		for(var i=0; i<url.length; i++){
+			img.src = url[i];	
+		}
 		if(img.complete){
 			fade_in(); //自己实验：兼容火狐谷歌
 		}
@@ -27,9 +30,7 @@ window.onload=function(){
 				fade_in(); //自己实验：兼容IE浏览器
 			};
 		}
-		for(var i=0; i<url.length; i++){
-			img.src = url[i];	
-		}
+		
 		
 	}	
 	
