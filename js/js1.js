@@ -17,17 +17,26 @@ window.onload=function(){
 		}
 
 		// 轮播淡入淡出
-function preloadimages(arr){
-    var newimages=[];
-    var arr=(typeof arr!="object")? [arr] : arr  //确保参数总是数组
-    for (var i=0; i<arr.length; i++){
-        newimages[i]=new Image();
-        newimages[i].src=arr[i];
-    }
-	
-	if(newimages.length=arr.length){
+	function picture_pre(url) {
+		var img = new Image();
+		if(img.complete){
+			fade_in(); //自己实验：兼容火狐谷歌
+		}
+		else {
+			img.onload = function() { 
+				fade_in(); //自己实验：兼容IE浏览器
+			};
+		}
+		for(var i=0; i<url.length; i++){
+			img.src = url[i];	
+		}
 		
-		var oDiv=document.getElementById('b2-r');
+	}	
+	
+	picture_pre(['img/mg0c.jpg','img/mg1c.jpg','img/mg4c.jpg','img/mg2c.jpg','img/mg10c.jpg']) 
+	
+		function fade_in(){
+			var oDiv=document.getElementById('b2-r');
 		var oImg=oDiv.getElementsByTagName('img')[0];
 		var now=0;
 		var aSpan=[];
@@ -146,14 +155,9 @@ function preloadimages(arr){
 					
 					
 		};
-	}
-	
-
-	
-}
- preloadimages(['img/mg0c.jpg','img/mg1c.jpg','img/mg4c.jpg','img/mg2c.jpg','img/mg10c.jpg'])
- 
-
+	}	
+		
+	 
 		//标题栏运动
 		var oDl=document.getElementById('b1-dl');
 		var aDd=oDl.children;
