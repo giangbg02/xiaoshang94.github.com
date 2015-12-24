@@ -23,11 +23,11 @@ window.onload=function(){
 			img.src = url[i];	
 		}
 		if(img.complete){
-			fade_in(); //自己实验：兼容火狐谷歌
+			fade_in(); //自己实验：兼容火狐谷歌...... ...... 
 		}
 		else {
 			img.onload = function() { 
-				fade_in(); //自己实验：兼容IE浏览器
+				fade_in(); //自己实验：兼容IE浏览器....... .......
 			};
 		}
 		
