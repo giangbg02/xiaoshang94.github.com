@@ -35,19 +35,74 @@ var oDiv=document.getElementById('b2-r');
 			oSpan.style.height=height+'px';
 			oSpan.className='b2-r-span';
 			oDiv.appendChild(oSpan);
+			
+					//轮播圆点对应图片    .b2-r-ul li:hover{background: #a9806c;}
+	var oUl_y=document.getElementById('b2-r-ul');
+	var aLi_y=oUl_y.getElementsByTagName('li');
+		
+		aLi_y[now].style.background='#a9806c';
+			for (var i=0; i<aLi_y.length; i++)
+		{
+		(function (index){
+			
+			aLi_y[i].onmouseover=function (){
+				aLi_y[index].style.background='#a9806c';
+				now=index;
+				clearInterval(oDiv.timer1);
+				tab()
+			};
+		})(i);
+		}
+		
+		
+		
+		//下一个
+		var oNext=document.getElementById('b2-r-next');
+		oNext.onclick=next;
+		oNext.onmouseover=function(){
+			this.style.background='rgba(0,0,0,.5)';
+		};
+		oNext.onmouseout=function(){
+			this.style.background='rgba(0,0,0,.3)';
+		};
+		
+		// 上一个
+		var oPrev=document.getElementById('b2-r-prev');
+		oPrev.onclick=function (){
+			now--;
+			
+			if (now == -1)
+			{
+				now=aLi_y.length-1;
+			}
+			
+			tab();
+		};
+		oPrev.onmouseover=function(){
+			this.style.background='rgba(0,0,0,.5)';
+		};
+		oPrev.onmouseout=function(){
+			this.style.background='rgba(0,0,0,.3)';
+		};
+		
 	
-	oDiv.timer1=setInterval(lunbo,3000)
+	oDiv.timer1=setInterval(next,3000)
+	
 	oDiv.onmouseover=function(){
+		oNext.style.display='block';
+		oPrev.style.display='block';
 		clearInterval(oDiv.timer1);
 	};
 
 	oDiv.onmouseout=function (){
-		oDiv.timer1=setInterval(lunbo,3000)
+		oNext.style.display='none';
+		oPrev.style.display='none';
+		oDiv.timer1=setInterval(next,3000)
 
 	};
 	
 	
-	function lunbo (){
+	function next (){
 		var bFlag=false;
 		if (bFlag)
 			{
@@ -56,9 +111,20 @@ var oDiv=document.getElementById('b2-r');
 			
 			bFlag=true;
 			
-			oSpan.style.opacity=0;	
-			now++;
+				
+				now++;
+				
+				tab();
 
+		}
+		
+	function tab(){
+				oSpan.style.opacity=0;	
+			for(var i=0; i<aLi_y.length; i++){
+				aLi_y[i].style.background='#3b3c50';	
+			}
+			aLi_y[now%5].style.background='#a9806c';
+			
 			oSpan.style.backgroundImage='url(img/'+aPath[now%5]+'.jpg)';
 			
 				move(oSpan,{opacity:1},{
@@ -67,7 +133,9 @@ var oDiv=document.getElementById('b2-r');
 						oImg.src='img/'+aPath[now%5]+'.jpg';
 					}	
 				})
-		}
+				
+				
+	};
 		
 		//标题栏运动
 		var oDl=document.getElementById('b1-dl');
