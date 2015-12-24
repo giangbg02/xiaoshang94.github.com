@@ -35,7 +35,7 @@ body{height:100%;}
 .b2-r-ul{position:absolute; left:440px; bottom:12px;  z-index:3;}
 .b2-r-ul li{width:10px; height:10px; background:#3b3c50; border-radius:50%; float:left; margin-left:2px; margin-right:2px; cursor:pointer;}
 .b2-r-j{position:absolute; top:50%; background:#000; color:#fff; font-size:50px; width:60px; height:57px; text-align:center;  z-index:4; font-weight:bold; 
-			background:rgba(0,0,0,.3);  -webkit-text-stroke: 1px #fff; margin-top:-40px; padding-top:3px; display:none; cursor:pointer;}
+			background:rgba(0,0,0,.3);  -webkit-text-stroke: 1px #fff; margin-top:-40px; padding-top:3px; display:none; cursor:pointer;	}
 .b2-r-prev{left:10px;  }
 .b2-r-next{right:10px;}
 

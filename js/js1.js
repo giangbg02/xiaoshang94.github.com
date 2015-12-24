@@ -22,7 +22,7 @@ function preloadimages(arr){
     var arr=(typeof arr!="object")? [arr] : arr  //确保参数总是数组
     for (var i=0; i<arr.length; i++){
         newimages[i]=new Image();
-        newimages[i].src=arr[i]
+        newimages[i].src=arr[i];
     }
 	
 	if(newimages.length=arr.length){
@@ -148,15 +148,12 @@ function preloadimages(arr){
 		};
 	}
 	
+
+	
 }
  preloadimages(['img/mg0c.jpg','img/mg1c.jpg','img/mg4c.jpg','img/mg2c.jpg','img/mg10c.jpg'])
  
- //preloadimages(['img/mg0c.jpg','img/mg1c.jpg','img/mg4c.jpg','img/mg2c.jpg','img/mg10c.jpg'])
 
-	
-
-	
-	
 		//标题栏运动
 		var oDl=document.getElementById('b1-dl');
 		var aDd=oDl.children;
