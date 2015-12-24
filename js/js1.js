@@ -25,14 +25,7 @@ window.onload=function(){
 			newimages[i].src=arr[i]
 		}
 		if(newimages.length==arr.length){
-			fade_in();	
-		}
-	}
-
-	 picture_pre(['img/mg0c.jpg','img/mg1c.jpg','img/mg4c.jpg','img/mg2c.jpg','img/mg10c.jpg']) 
-	 
-	function fade_in(){
-			var oDiv=document.getElementById('b2-r');
+				var oDiv=document.getElementById('b2-r');
 		var oImg=oDiv.getElementsByTagName('img')[0];
 		var now=0;
 		var aSpan=[];
@@ -134,7 +127,7 @@ window.onload=function(){
 			
 		function tab(){
 			
-					oSpan.style.opacity=0;	
+				oSpan.style.opacity=0;	
 				for(var i=0; i<aLi_y.length; i++){
 					aLi_y[i].style.background='#3b3c50';	
 				}
@@ -152,10 +145,11 @@ window.onload=function(){
 					
 		};
 
-}
-		
+	}
+	}
 
-	
+	 picture_pre(['img/mg0c.jpg','img/mg1c.jpg','img/mg4c.jpg','img/mg2c.jpg','img/mg10c.jpg']) 
+
 
 		//标题栏运动
 		var oDl=document.getElementById('b1-dl');
