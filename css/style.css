@@ -39,7 +39,8 @@ body{height:100%;}
 .b2-r-prev{left:10px;  }
 .b2-r-next{right:10px;}
 
-.b2-r-span { position:absolute; opacity:0;  background:url(../img/mg1c.jpg) no-repeat; eft:0; top:9px;}
+.b2-r-span { position:absolute; opacity:0; filter:alpha(opacity:0); background:url(../img/mg1c.jpg) no-repeat;
+			 left:0; top:9px;}
 .b2-r-box{position:absolute; border-radius:10px; width:502px; height:132px; left:445px; top:340px; z-index: 2; }
 .b2-r-boxl{float: left; width: 242px; text-align: center; height: 100%; position: relative; z-index: 3;
 	border-right:1px #fff dashed; height:80px;  margin-top:24px;}
@@ -47,11 +48,11 @@ body{height:100%;}
 .b2-r-boxl-fl{color: #fff; font-size: 35px; letter-spacing: 3px; font-family: Tahoma; line-height:100%;
 margin-bottom: 20px;}
 .b2-r-box-opa{position:absolute; left:0; top:0; border-radius:10px; border:1px #fff dashed; background:#000;
-	opacity:0.25; width:502px; height:132px; }
+	opacity:0.25; filter:alpha(opacity:25); width:502px; height:132px; }
 .b2-r-box1-yb{font-size: 26px; color: #fff; font-weight: bold; letter-spacing: 3px; }
 .b2-r-boxr{color:#fff; position:relative; z-index:3; font-size: 15px; letter-spacing:4px; font-weight:bold;
  	margin-top:21px; margin-left: 24px; float: left;}
-.b2-r-boxr p{line-height:28px; width:215px;}
+.b2-r-boxr p{line-height:28px; width:216px;}
 /*第三部分，专题浪漫爱情系列*/
 .b3{width:1000px; margin: 0 auto;}
 .b3-l-t p{color: #5a5a5a;}
