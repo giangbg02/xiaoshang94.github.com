@@ -128,6 +128,7 @@ window.onload=function(){
 		function tab(){
 			
 				oSpan.style.opacity=0;	
+				oSpan.style.filter='alpha(opacity:0)';
 				for(var i=0; i<aLi_y.length; i++){
 					aLi_y[i].style.background='#3b3c50';	
 				}
@@ -135,9 +136,10 @@ window.onload=function(){
 				
 				oSpan.style.backgroundImage='url(img/'+aPath[now%5]+'.jpg)';
 				
-					move(oSpan,{opacity:1},{
+					move(oSpan,{'opacity':1},{
 						complete:function(){
 							oSpan.style.opacity=1;
+							oSpan.style.filter='alpha(opacity:100)';
 							oImg.src='img/'+aPath[now%5]+'.jpg';
 						}	
 					})
