@@ -38,7 +38,7 @@ function move(obj, json, options)
 			if (name == 'opacity')
 			{
 				obj.style[name]=cur;
-				obj.style.filter='alpha(opacity:'+(cur*100)+')';  //兼容
+				obj.style.filter='alpha(opacity:'+(cur*100)+')';
 			}
 			else
 			{
