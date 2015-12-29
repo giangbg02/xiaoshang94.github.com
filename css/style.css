@@ -40,7 +40,7 @@ body{height:100%;}
 .b2-r-next{right:10px;}
 
 .b2-r-span { position:absolute; opacity:0; filter:alpha(opacity:0); background:url(../img/mg1c.jpg) no-repeat;
-			 left:0; top:9px;}  /*让IE低版本兼容*/
+			 left:0; top:9px;}
 .b2-r-box{position:absolute; border-radius:10px; width:502px; height:132px; left:445px; top:340px; z-index: 2; }
 .b2-r-boxl{float: left; width: 242px; text-align: center; height: 100%; position: relative; z-index: 3;
 	border-right:1px #fff dashed; height:80px;  margin-top:24px;}
