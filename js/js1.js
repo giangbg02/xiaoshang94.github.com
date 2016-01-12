@@ -24,8 +24,8 @@ window.onload=function(){
 			newimages[i]=new Image();
 			newimages[i].src=arr[i]
 		}
-		if(newimages.length==arr.length){
-				var oDiv=document.getElementById('b2-r');
+		if(newimages[0].onload&&newimgaes[1].onload&&newimages[2]&&newimages[3].onload&&newimages[4].onload){
+		var oDiv=document.getElementById('b2-r');
 		var oImg=oDiv.getElementsByTagName('img')[0];
 		var now=0;
 		var aSpan=[];
