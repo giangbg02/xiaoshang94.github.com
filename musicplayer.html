@@ -109,7 +109,17 @@
 						}
 						play(iNow);
 						break;
-
+						
+					default:
+						iNow++;
+						if(iNow==arrSong.length){
+							oA.pause();
+							clear();
+							return;
+						}else {
+							play(iNow);
+						}
+						break;
 
 				}
 			};
@@ -227,11 +237,13 @@
 					case 39:
 						iJ+=2;
 						oA.currentTime=iJ;
+						return false;
 						break;
 						
 					case 37:
 						iJ-=2;
 						oA.currentTime=iJ;
+						return false;
 						break;
 						
 					case 38:
@@ -241,6 +253,7 @@
 								oA.volume=1;
 							}
 						}
+						return false;
 						break;
 						
 					case 40:
@@ -250,11 +263,14 @@
 								oA.volume=0;
 							}
 						}
+						return false;
 						break;
 						
 					case 32:
 						bz();
+						return false;
 						break;
+						 
 				}
 			}
 
