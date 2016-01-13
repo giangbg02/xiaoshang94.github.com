@@ -34,11 +34,14 @@ body{height:100%;}
 .b2-r{padding-top:9px; position:relative; border-bottom:#a9806c solid 10px; }
 .b2-r-ul{position:absolute; left:440px; bottom:12px;  z-index:3;}
 .b2-r-ul li{width:10px; height:10px; background:#3b3c50; border-radius:50%; float:left; margin-left:2px; margin-right:2px; cursor:pointer;}
-.b2-r-j{position:absolute; top:50%; background:#000; color:#fff; font-size:50px; width:60px; height:57px; text-align:center;  z-index:4; font-weight:bold; 
-			background:rgba(0,0,0,.3);  -webkit-text-stroke: 1px #fff; margin-top:-40px; padding-top:3px; display:none; cursor:pointer;	}
-.b2-r-prev{left:10px;  }
-.b2-r-next{right:10px;}
-
+.b2-r-j{position:absolute; top:50%; color:#fff; font-size:50px; width:60px; height:57px; text-align:center;  z-index:4; font-weight:bold; 
+			  -webkit-text-stroke: 1px #fff; margin-top:-40px; padding-top:3px; display:none; cursor:pointer;	}
+.b2-r-prev{left:10px; float:left; }
+.b2-r-prev em{ position:absolute; left:0; top:0; background:#000; width:60px; height:60px; filter:alpha(opacity:20); opacity:0.2;}
+.b2-r-prev b{position:absolute; -webkit-text-stroke: 1px #fff; text-align:center; width:60px; line-height:60px; left:0; top:0; }
+.b2-r-next{right:10px; float:left;}
+.b2-r-next em{ position:absolute; left:0; top:0; background:#000; width:60px; height:60px; filter:alpha(opacity:20); opacity:0.2;}
+.b2-r-next b{position:absolute; -webkit-text-stroke: 1px #fff; text-align:center; width:60px; line-height:60px; left:0; top:0; }
 .b2-r-span { position:absolute; opacity:0; filter:alpha(opacity:0); background:url(../img/mg1c.jpg) no-repeat;
 			 left:0; top:9px;}
 .b2-r-box{position:absolute; border-radius:10px; width:502px; height:132px; left:445px; top:340px; z-index: 2; }
@@ -90,3 +93,4 @@ margin-bottom: 20px;}
 	margin-right: 6px;}
 .b5-ul span{ float: left;}
 .b5 h2{font-size: 20px; font-weight: bold; margin-bottom:15px; }
+.b5 a:hover span{text-decoration:underline;}

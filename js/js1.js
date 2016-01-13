@@ -43,53 +43,102 @@ window.onload=function(){
 				oSpan.className='b2-r-span';
 				oDiv.appendChild(oSpan);
 				
-						//轮播圆点对应图片    .b2-r-ul li:hover{background: #a9806c;}
+		//轮播圆点对应图片    .b2-r-ul li:hover{background: #a9806c;}
 		var oUl_y=document.getElementById('b2-r-ul');
 		var aLi_y=oUl_y.getElementsByTagName('li');
-			
+		var bFla=false;
 			aLi_y[now].style.background='#a9806c';
 				for (var i=0; i<aLi_y.length; i++)
 			{
 			(function (index){
 				
-				aLi_y[i].onmouseover=function (){
-					aLi_y[index].style.background='#a9806c';
-					now=index;
-					clearInterval(oDiv.timer1);
-					tab()
-				};
+					aLi_y[i].onmouseover=function (ev){
+					var oEvent=ev || event;
+					
+						aLi_y[index].style.background='#a9806c';
+						now=index;
+						clearInterval(oDiv.timer1);
+						tab();
+				};	
 			})(i);
 			}
-			
-			
-			
+					
 			//下一个
 			var oNext=document.getElementById('b2-r-next');
-			oNext.onclick=next;
+			oNext.onclick=function(){
+					
+					if(bFla){
+						return;	
+					}
+					
+					bFla=true;
+					
+					now++;
+					
+					tab();	
+			};
+			//阻止双击选中
+			oNext.onmousedown=function(ev){
+			//	ev.preventDefault && ev.preventDefault();
+				return false;
+			}
+			var oPa=document.getElementById('b2-r-prev-em1');
 			oNext.onmouseover=function(){
-				this.style.background='rgba(0,0,0,.5)';
+				if(document.getElementsByClassName){
+					oPa.style.opacity='0.5' ;
+				}else{
+					oPa.style.filter='alpha(opacity:50)' ;
+				}
 			};
 			oNext.onmouseout=function(){
-				this.style.background='rgba(0,0,0,.3)';
+				if(document.getElementsByClassName){
+					
+					oPa.style.opacity='0.2' 
+				}else{
+					oPa.style.filter='alpha(opacity:20)' ; 
+				}
 			};
 			
 			// 上一个
 			var oPrev=document.getElementById('b2-r-prev');
 			oPrev.onclick=function (){
+	
+				if(bFla){
+					return;
+				}
+				
+				bFla=true;
 				now--;
 				
 				if (now == -1)
 				{
 					now=aLi_y.length-1;
 				}
-				
+	
 				tab();
 			};
+			//阻止双击选中
+			oPrev.onmousedown=function(ev){
+			//	ev.preventDefault && ev.preventDefault();
+				return false;	
+			}
+			
+			var oPa1=document.getElementById('b2-r-prev-em');
 			oPrev.onmouseover=function(){
-				this.style.background='rgba(0,0,0,.5)';
+				if(document.getElementsByClassName){
+					oPa1.style.opacity='0.5' ;
+				}else{
+					oPa1.style.filter='alpha(opacity:50)' ;
+				}
+
 			};
 			oPrev.onmouseout=function(){
-				this.style.background='rgba(0,0,0,.3)';
+				if(document.getElementsByClassName){
+					
+					oPa1.style.opacity='0.2' 
+				}else{
+					oPa1.style.filter='alpha(opacity:20)' ; 
+				}
 			};
 			
 		
@@ -110,15 +159,7 @@ window.onload=function(){
 		
 		
 		function next (){
-			var bFlag=false;
-			if (bFlag)
-				{
-					return;
-				}
-				
-				bFlag=true;
-				
-					
+		
 					now++;
 					
 					tab();
@@ -126,7 +167,6 @@ window.onload=function(){
 			}
 			
 		function tab(){
-			
 				oSpan.style.opacity=0;	
 				oSpan.style.filter='alpha(opacity:0)';
 				for(var i=0; i<aLi_y.length; i++){
@@ -140,10 +180,10 @@ window.onload=function(){
 						complete:function(){
 							oSpan.style.opacity=1;
 							oSpan.style.filter='alpha(opacity:100)';
+							bFla=false;
 							oImg.src='img/'+aPath[now%5]+'.jpg';
 						}	
-					})
-					
+					})					
 					
 		};
 
