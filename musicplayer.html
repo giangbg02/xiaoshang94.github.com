@@ -7,20 +7,22 @@
 	<style>
 		html{height:100%;}
 		body{background:#000; width: 1120px; background: url("img/bj2.png") center center; background-size: 100% 100%; height:100%;}
+		.zzz{width: 1120px; height: 550px; overflow: hidden;}
 		.zong{position: relative; width:1120px; margin-top: 0px; margin-left: -120px; }
 		.xiaoyus{margin-left: 350px; width: 650px; height:550px; background: url('img/xiaoyubeijing.png') no-repeat  left top; position:relative;}
 		.xiayiqu{background:url(img/xiaoyuxiayiqu.png) no-repeat; width:35px; height:35px; position:absolute; left:270px; top:37px; cursor:pointer;}
 		.shangyi{background:url(img/xiaoyushangyiqu.png) no-repeat; width:35px; height:35px; position:absolute; left:276px; top:489px; cursor:pointer;}
 		.bofang{border-radius: 50%; width:95px; height:95px; background:url('img/xiaoyusbofang.png') no-repeat center center; position:absolute; left:132px; top:202px;
 		  box-shadow:0px 0px 2px #235549,0px 0px 10px #235549,0px 0px 10px #235549,0px 0px 10px #235549,0px 0px 20px #388fa4,0px 0px 20px #388fa4; cursor:pointer;}
-		.pl{width:23px; height:22px; background:url(img/pl.png) no-repeat; margin-top:8px; }
-		.sh{width:23px; height:23px; background:url(img/sh.png) no-repeat; margin-left:32px; margin-top:19px;}
-		.rp{width:23px; height:22px; background:url(img/rp.png) no-repeat; margin-left:65px; margin-top:18px;}
-		.eq{width:23px; height:23px; background:url(img/eq.png) no-repeat; margin-left:93px;}
+		.pl{width:23px; height:22px; background:url(img/pl.png) no-repeat; margin-top:8px; border-radius: 50%;}
+		.sh{width:23px; height:23px; background:url(img/sh.png) no-repeat; margin-left:32px; margin-top:19px; border-radius: 50%;}
+		.rp{width:23px; height:22px; background:url(img/rp.png) no-repeat; margin-left:65px; margin-top:18px; border-radius: 50%;}
+		.eq{width:23px; height:23px; background:url(img/eq.png) no-repeat; margin-left:93px; border-radius: 50%;}
 		.jindutiao{width:194px; height:6px; background:url(img/xiaoyusjindutiao.png) no-repeat left top; position:absolute; left:244px; top:266px; border-radius:3px;}
 		.jy{width:15px; height:15px; background:url(img/jy.png) no-repeat; position:absolute; left:0; top:-5px;}
 		.music{width:107px; height:40px; position:absolute; left:250px; top:202px; color:#006f72; font-size:20px;}
-		.yinliang{width:28px; height: 28px; background: url("img/xiaoyuyinliang.png")no-repeat; position: absolute; left: 340px; top:64px; background-size: 100%; text-shadow: 0px 0px 2px #fff;}
+		.j-yuan{width:540px; height: 540px; border-radius: 50%; position: absolute; left: 0px; top:64px;}
+		.yinliang{width:28px; height: 28px; background: url("img/xiaoyuyinliang.png")no-repeat; position: absolute; left: 353.435px; top: 13.2147px; margin-left: -14px; margin-top: -14px; background-size: 100%; text-shadow: 0px 0px 2px #fff;}
 		.gequ{width: 86px; height: 140px; left: 536px; top:250px; position: absolute; overflow: hidden;}
 		.geci{width: 112px; height: 88px; position: absolute; left: 270px; top:286px; overflow: hidden; line-height: 18px;}
 		.shunx{position:absolute; left:128px; top:290px;}
@@ -34,7 +36,7 @@
 		.zbl-p{font-family: "Microsoft Yahei"; color: #101025; line-height: 26px; margin-left: 64px; margin-top: 131px;
 		font-size: 16px; overflow: hidden; height:256px; width: 201px;}
 		.on{color:#009;}
-
+		.j-zt{background: url("img/xiaoyuszanting.png") no-repeat 9999px 9999px;}
 	</style>
 	<script>
 		var arrSong=[
@@ -64,7 +66,6 @@
 				(function(index){
 					aA[i].onclick=function(){
 						iNow=index;
-
 						play(iNow);
 					}
 				})(i);
@@ -80,6 +81,35 @@
 				oA.play();
 				clear();
 				aA[n%10].className='on';
+			}
+
+			//默认第一个样式this
+			//切换模式
+			var aLi=document.querySelectorAll('.shunx li');
+			aLi[0].onclick=function(){
+				sty(this);
+				oA.dataset.mode='order';
+			};
+			aLi[1].onclick=function(){
+				sty(this);
+				oA.dataset.mode='single';
+			};
+			aLi[2].onclick=function(){
+				sty(this);
+				oA.dataset.mode='random';
+			};
+			aLi[3].onclick=function(){
+				sty(this);
+				oA.dataset.mode='cycle';
+			};
+
+			sty(aLi[0]);
+
+			function sty(th){
+				for(var i=0; i<aLi.length; i++){
+					aLi[i].style.boxShadow='';
+				}
+				th.style.boxShadow='inset 0px 0px 20px rgba(0,0,0,0.4)';
 			}
 
 			//播放完毕
@@ -109,7 +139,7 @@
 						}
 						play(iNow);
 						break;
-						
+
 					default:
 						iNow++;
 						if(iNow==arrSong.length){
@@ -122,21 +152,6 @@
 						break;
 
 				}
-			};
-
-			//切换模式
-			var aLi=document.querySelectorAll('.shunx li');
-			aLi[0].onclick=function(){
-				oA.dataset.mode='order';
-			};
-			aLi[1].onclick=function(){
-				oA.dataset.mode='single';
-			};
-			aLi[2].onclick=function(){
-				oA.dataset.mode='random';
-			};
-			aLi[3].onclick=function(){
-				oA.dataset.mode='cycle';
 			};
 
 
@@ -153,8 +168,11 @@
 			oA.oncanplay=function(){
 				setInterval(function(){
 					oFang.style.left=oA.currentTime/oA.duration*jdWidth+'px';
+					iJ=oA.currentTime;
 				},1000)
-				iJ=oA.currentTime;
+				
+				
+				
 
 				//进度条拖拽
 				oFang.onmousedown=function(ev){
@@ -230,8 +248,49 @@
 						play(iNow);
 				}
 				
-            
-	//快进、音量  用按键控制		 
+
+			//静音
+			var oMute=document.querySelector('.yinliang');
+			oMute.ondblclick=function(){
+				if(oA.muted){
+					oA.muted=false;
+					oMute.title="静音";
+					oMute.style.background='url(img/xiaoyuyinliang.png) no-repeat';
+				}else{
+					oA.muted=true;
+					oMute.title="音量";
+					oMute.style.background='url(img/jingyin1.png) no-repeat';
+
+				};
+			};
+
+				  //弧形拖拽
+					var oJyuan=document.getElementById('j-yuan');
+					window.a=18; // 角度
+					window.mina=18;
+					window.maxa=58;
+					var R=oJyuan.offsetWidth/2;
+					oMute.onmousedown=function (ev){
+						var oldX=ev.clientX;
+						document.onmousemove=function(ev){
+							var newX=ev.clientX;
+							if(newX-oldX > 0){
+								a+=0.5;
+							}else{
+								a-=0.5;
+							}
+							ylld(a);
+
+						}
+						document.onmouseup=function(){
+							document.onmousemove=null;
+							document.onmouseup=null;
+						}
+
+					};
+					
+					
+			//快进、音量  用按键控制
 			document.onkeydown=function(ev){
 				switch(ev.keyCode){
 					case 39:
@@ -248,9 +307,13 @@
 						
 					case 38:
 						if(oA.volume<1){
-						oA.volume+=0.1;
-							if(oA.volume>=0.9){
+							if(oA.volume<=0.9){
+								oA.volume+=0.1;
+								ylld(mta(oA.volume));
+								//oMute.style.background='url(img/xiaoyuyinliang.png) no-repeat';
+							}else if(oA.volume>0.9){
 								oA.volume=1;
+								ylld(mta(oA.volume));
 							}
 						}
 						return false;
@@ -258,9 +321,13 @@
 						
 					case 40:
 						if(oA.volume>0){
-							oA.volume-=0.1;
-							if(oA.volume<=0.1){
+							if(oA.volume>=0.1){
+								oA.volume-=0.1;
+								ylld(mta(oA.volume));
+							}else if(oA.volume<0.1){ 
 								oA.volume=0;
+								ylld(mta(oA.volume));
+								//oMute.style.background='url(img/jingyin1.png) no-repeat';
 							}
 						}
 						return false;
@@ -274,85 +341,110 @@
 				}
 			}
 
-			//静音
-			var oMute=document.querySelector('.yinliang');
-			oMute.ondblclick=function(){
-				if(oA.muted){
-					oA.muted=false;
-					oMute.title="静音";
-					oMute.style.background='url(img/xiaoyuyinliang.png) no-repeat';
-				}else{
-					oA.muted=true;
-					oMute.title="音量";
-					oMute.style.background='url(img/jingyin1.png) no-repeat';
+
+					function ylld(a){
+							if(a <= mina){
+								a=mina;
+							}else if(a>=maxa){
+								a=maxa;
+							}
+							
+							oA.volume=1-(a-mina)/(maxa-mina);
+							
+							if(oA.volume<=0){
+								oMute.style.background='url(img/jingyin1.png) no-repeat';
+							}else{
+								oMute.style.background='url(img/xiaoyuyinliang.png) no-repeat';
+							}
+							
+							var x=R+Math.sin(a2d(a))*R;
+							var y=R-Math.cos(a2d(a))*R;
+
+							oMute.style.left=x+'px';
+							oMute.style.top=y+'px';
+							oMute.style.marginLeft=-14+'px';
+							oMute.style.marginTop=-14+'px';	
+					}
 					
-				}
-			}
+					function mta(vol){
+						return (1-vol)*(maxa-mina)+mina;
+					}
+
+					function a2d(a)
+					{
+						return a*Math.PI/180;
+					}
 		};
 	</script>
 </head>
 <body>
-<audio id="a1" src="music/The Sore Feet Song.mp3" > <!-- controls data-mode="order"-->
-	您的浏览器不支持audio标签，请升级后再试，谢谢
-</audio>
-<div class="zong">
-	<div class="xiaoyus">
-		<div class="yinliang"></div>
-		<div class="xiayiqu"></div>
-		<div class="bofang" title="播放"></div>
-		<div class="shangyi"></div>
-		<div class="jindutiao">
-			<div class="jy"></div>
-		</div>
-		<div class="music">
-			<h2>My plaear</h2>
-		</div>
-		<ul class="clearfix shunx">
-			<li class="pl" title="顺序播放"></li>
-			<li class="sh" title="单曲循环"></li>
-			<li class="rp" title="随机播放"></li>
-			<li class="eq" title="循环列表"></li>
-		</ul>
-		<div class="geci">
-			<p>
+<div class="zzz">
+	<div class="j-zt"></div>
+	<audio id="a1" src="music/The Sore Feet Song.mp3" > <!-- controls data-mode="order"-->
+		您的浏览器不支持audio标签，请升级后再试，谢谢
+	</audio>
+	<div class="zong">
+		<div class="xiaoyus">
+			<div class="j-yuan" id="j-yuan">
+				<div class="yinliang"></div>
+			</div>
 
-				如果爱到最后 - 心悦br
-				<br/>
-				词：陆晓旭
-				<br/>
-				曲：阿Ben
-				<br/>
-				原以为你是我的谁
-				<br/>
-				想你想到了我心醉
-				<br/>
-				光阴如流水
-				<br/>
-			</p>
+			<div class="xiayiqu"></div>
+			<div class="bofang" title="播放"></div>
+			<div class="shangyi"></div>
+			<div class="jindutiao">
+				<div class="jy"></div>
+			</div>
+			<div class="music">
+				<h2>My plaear</h2>
+			</div>
+			<ul class="clearfix shunx">
+				<li class="pl" title="顺序播放"></li>
+				<li class="sh" title="单曲循环"></li>
+				<li class="rp" title="随机播放"></li>
+				<li class="eq" title="循环列表"></li>
+			</ul>
+			<div class="geci">
+				<p>
+
+					如果爱到最后 - 心悦br
+					<br/>
+					词：陆晓旭
+					<br/>
+					曲：阿Ben
+					<br/>
+					原以为你是我的谁
+					<br/>
+					想你想到了我心醉
+					<br/>
+					光阴如流水
+					<br/>
+				</p>
+			</div>
+			<div class="gequ">
+			</div>
 		</div>
-		<div class="gequ">
+		<div class="paopao">
+			<div class="pp1"></div>
+			<div class="pp2"></div>
+			<div class="pp3"></div>
 		</div>
+		<!--<div class="xiaoyud"></div>-->
 	</div>
-	<div class="paopao">
-		<div class="pp1"></div>
-		<div class="pp2"></div>
-		<div class="pp3"></div>
+	<div class="zbl">
+		<ul class="zbl-p">
+			<li><a href="javascript:;">1.The Sore Feet Song</a></li>
+			<li><a href="javascript:;">2.Big Big World</a></li>
+			<li><a href="javascript:;">3.天空之城钢琴曲</a></li>
+			<li><a href="javascript:;">4.羽泉-奔跑</a></li>
+			<li><a href="javascript:;">5.后会无期</a></li>
+			<li><a href="javascript:;">6.蒲公英的约定</a></li>
+			<li><a href="javascript:;">7.青花瓷</a></li>
+			<li><a href="javascript:;">8.清明雨上</a></li>
+			<li><a href="javascript:;">9.孙燕姿-遇见</a></li>
+			<li><a href="javascript:;">10.王强-秋天不回来</a></li>
+		</ul>
 	</div>
-	<!--<div class="xiaoyud"></div>-->
-</div>
-<div class="zbl">
-	<ul class="zbl-p">
-		<li><a href="javascript:;">1.The Sore Feet Song</a></li>
-		<li><a href="javascript:;">2.Big Big World</a></li>
-		<li><a href="javascript:;">3.天空之城钢琴曲</a></li>
-		<li><a href="javascript:;">4.羽泉-奔跑</a></li>
-		<li><a href="javascript:;">5.后会无期</a></li>
-		<li><a href="javascript:;">6.蒲公英的约定</a></li>
-		<li><a href="javascript:;">7.青花瓷</a></li>
-		<li><a href="javascript:;">8.清明雨上</a></li>
-		<li><a href="javascript:;">9.孙燕姿-遇见</a></li>
-		<li><a href="javascript:;">10.王强-秋天不回来</a></li>
-	</ul>
 </div>
 </body>
 </html>
