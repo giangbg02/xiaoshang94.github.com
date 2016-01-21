@@ -117,18 +117,8 @@
 			var jdWidth=194;
 			var fWidth=15;
 			var iJ=0;
-
-			//自动同步进度
-			oA.oncanplay=function(){
-				setInterval(function(){
-					oFang.style.left=oA.currentTime/oA.duration*jdWidth+'px';
-					iJ=oA.currentTime;
-				},1000)
-				
-				
-				
-
-				//进度条拖拽
+			
+			//进度条拖拽
 				oFang.onmousedown=function(ev){
 					var disX=ev.clientX-oFang.offsetLeft;
 					ev.cancelBubble=true;
@@ -148,6 +138,12 @@
 					}
 				}
 
+			//自动同步进度
+			oA.ontimeupdate=function(){
+			
+					oFang.style.left=oA.currentTime/oA.duration*jdWidth+'px';
+					iJ=oA.currentTime;
+				
 				//进度条点击
 				oJindu.onmousedown=function(ev){
 					var oJleft=oJindu.offsetLeft+oJindu.parentNode.offsetLeft+oJindu.parentNode.parentNode.offsetLeft;
