@@ -24,7 +24,7 @@
 		.j-yuan{width:540px; height: 540px; border-radius: 50%; position: absolute; left: 0px; top:64px;}
 		.yinliang{width:28px; height: 28px; background: url("img/xiaoyuyinliang.png")no-repeat; position: absolute; left: 353.435px; top: 13.2147px; margin-left: -14px; margin-top: -14px; background-size: 100%; text-shadow: 0px 0px 2px #fff;}
 		.gequ{width: 86px; height: 140px; left: 536px; top:250px; position: absolute; overflow: hidden;}
-		.geci{width: 112px; height: 88px; position: absolute; left: 270px; top:286px; overflow: hidden; line-height: 18px;}
+		.geci{width: 112px; height: 94px; position: absolute; left: 270px; top:286px; overflow: hidden; line-height: 18px;}
 		.shunx{position:absolute; left:128px; top:290px;}
 		.shunx li{ position:absolute; left:0; top:0; cursor:pointer;}
 		/*泡泡*/
@@ -36,8 +36,15 @@
 		.zbl-p{font-family: "Microsoft Yahei"; color: #101025; line-height: 26px; margin-left: 64px; margin-top: 131px;
 		font-size: 16px; overflow: hidden; height:256px; width: 201px;}
 		.on{color:#009;}
+		.lrc_li1{color:#009;}
 		.j-zt{background: url("img/xiaoyuszanting.png") no-repeat 9999px 9999px;}
+		.j-zt1{background:url(img/jingyin1.png) no-repeat 9999px 9999px;}
+		.lrc_ul{position:absolute; top:0; left:0; transition: 0.2s all ease;}
+		.lrc_ul li{line-height:16px;} 
+		.aaa{}
 	</style>
+	<script src="ajax.js"></script>
+	<script src="music-js/lrczjson.js"></script>
 	<script>
 		var arrSong=[
 			'The Sore Feet Song',
@@ -58,29 +65,20 @@
 
 			var oA=document.querySelector('#a1');
 			var aA=document.querySelectorAll('.zbl-p li a');
-
-
+			var oLrc=document.querySelector('.geci');
 			var iNow=0;
+			var lrc_ttzz=0; //避免和拖拽点击以及播放重复创建歌词
 
 			for(var i=0; i<aA.length; i++){
 				(function(index){
 					aA[i].onclick=function(){
 						iNow=index;
 						play(iNow);
+						oBof.title="暂停";
+						oBof.style.background='url(img/xiaoyuszanting.png)no-repeat center center';
+						lrc_ttzz++;
 					}
 				})(i);
-			}
-
-			function clear(){
-				for(var i=0; i<aA.length; i++){
-					aA[i].className='';
-				}
-			}
-			function play(n){
-				oA.src='music /'+arrSong[n%10]+'.mp3';
-				oA.play();
-				clear();
-				aA[n%10].className='on';
 			}
 
 			//默认第一个样式this
@@ -111,50 +109,6 @@
 				}
 				th.style.boxShadow='inset 0px 0px 20px rgba(0,0,0,0.4)';
 			}
-
-			//播放完毕
-			oA.onended=function(){
-				switch(oA.dataset.mode){
-					case 'order':
-						iNow++;
-						if(iNow==arrSong.length){
-							oA.pause();
-							clear();
-							return;
-						}else {
-							play(iNow);
-						}
-						break;
-					case 'single':
-						play(iNow);
-						break;
-					case 'random':
-						iNow=rnd(0,arrSong.length);
-						play(iNow);
-						break;
-					case 'cycle':
-						iNow++;
-						if(iNow==arrSong.length){
-							iNow=0;
-						}
-						play(iNow);
-						break;
-
-					default:
-						iNow++;
-						if(iNow==arrSong.length){
-							oA.pause();
-							clear();
-							return;
-						}else {
-							play(iNow);
-						}
-						break;
-
-				}
-			};
-
-
 			var oBof=document.querySelector('.bofang');
 
 			//播放进度条
@@ -181,8 +135,12 @@
 					document.onmousemove=function(ev){
 						var Left=ev.clientX-disX;
 						oFang.style.left=pd(Left)+'px';
-						oA.currentTime=pd(Left)/jdWidth*oA.duration;					
-						
+						oA.currentTime=pd(Left)/jdWidth*oA.duration;		
+						if(lrc_ttzz < 1){
+							lrc_too(iNow);
+							aA[iNow%10].className='on';	
+						}	
+						lrc_ttzz++;		
 					}
 					document.onmouseup=function(){
 						document.onmousemove=null;
@@ -196,6 +154,11 @@
 					var Left=ev.clientX-oJleft-fWidth/2;				
 					oFang.style.left=pd(Left)+'px';
 					oA.currentTime=pd(Left)/jdWidth*oA.duration;
+					if(lrc_ttzz < 1){
+						lrc_too(iNow);
+						aA[iNow%10].className='on';	
+					}	
+					lrc_ttzz++;	
 					document.onmouseup=function(){
 						document.onmousemove=null;
 						document.onmouseup=null;
@@ -218,14 +181,21 @@
 				
 				function bz(){
 					if(oBof.title=="播放"){
+						
 						oBof.title="暂停";
 						oBof.style.background='url(img/xiaoyuszanting.png)no-repeat center center';
 						oA.play();
 						aA[iNow].className='on';
+						//创建歌词避免暂停再开始多余的运动，也避免和进度条拖拽和点击重复
+						if(lrc_ttzz < 1){
+							lrc_too(iNow);		
+						}
+						lrc_ttzz++;
 					}else{
 						oBof.title="播放";
 						oBof.style.background='url(img/xiaoyusbofang.png)no-repeat center center';
 						oA.pause();
+
 					}	
 				};
 				
@@ -237,6 +207,8 @@
 							iNow=0;
 						}
 						play(iNow);
+						oBof.title="暂停";
+						oBof.style.background='url(img/xiaoyuszanting.png)no-repeat center center';
 				}
 				//上一曲
 				var oPrev=document.querySelector('.shangyi')
@@ -246,6 +218,8 @@
 							iNow=arrSong.length-1;
 						}
 						play(iNow);
+						oBof.title="暂停";
+						oBof.style.background='url(img/xiaoyuszanting.png)no-repeat center center';
 				}
 				
 
@@ -310,7 +284,6 @@
 							if(oA.volume<=0.9){
 								oA.volume+=0.1;
 								ylld(mta(oA.volume));
-								//oMute.style.background='url(img/xiaoyuyinliang.png) no-repeat';
 							}else if(oA.volume>0.9){
 								oA.volume=1;
 								ylld(mta(oA.volume));
@@ -327,7 +300,6 @@
 							}else if(oA.volume<0.1){ 
 								oA.volume=0;
 								ylld(mta(oA.volume));
-								//oMute.style.background='url(img/jingyin1.png) no-repeat';
 							}
 						}
 						return false;
@@ -374,11 +346,13 @@
 					{
 						return a*Math.PI/180;
 					}
-		};
+							
+};
 	</script>
 </head>
 <body>
 <div class="zzz">
+	<div class="j-zt1"></div>
 	<div class="j-zt"></div>
 	<audio id="a1" src="music/The Sore Feet Song.mp3" > <!-- controls data-mode="order"-->
 		您的浏览器不支持audio标签，请升级后再试，谢谢
@@ -405,21 +379,6 @@
 				<li class="eq" title="循环列表"></li>
 			</ul>
 			<div class="geci">
-				<p>
-
-					如果爱到最后 - 心悦br
-					<br/>
-					词：陆晓旭
-					<br/>
-					曲：阿Ben
-					<br/>
-					原以为你是我的谁
-					<br/>
-					想你想到了我心醉
-					<br/>
-					光阴如流水
-					<br/>
-				</p>
 			</div>
 			<div class="gequ">
 			</div>
@@ -446,5 +405,6 @@
 		</ul>
 	</div>
 </div>
+<script src="music-js/lrc.js"></script>
 </body>
 </html>

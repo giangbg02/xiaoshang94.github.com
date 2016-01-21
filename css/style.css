@@ -1,6 +1,12 @@
 html{height:100%;}
 body{height:100%;}
 ::selection{background:#B9BFCA; color: #fff;}
+/*图片预加载*/
+.j-onload-1{background:url(../img/mg0c.jpg) no-repeat 9999px 9999px;}
+.j-onload-2{background:url(../img/mg1c.jpg) no-repeat 9999px 9999px;}
+.j-onload-3{background:url(../img/mg4c.jpg) no-repeat 9999px 9999px;}
+.j-onload-4{background:url(../img/mg2c.jpg) no-repeat 9999px 9999px;}
+.j-onload-5{background:url(../img/mg10c.jpg) no-repeat 9999px 9999px;}
 /*白边*/
 .bb{height:52px;}
 /*第一部分*/   
