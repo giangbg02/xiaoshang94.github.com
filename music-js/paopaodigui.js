@@ -1,5 +1,7 @@
-	function move(obj, json, options,R)
+	function Pmove(obj, json, options,R)
 	{
+		obj.style.display='block';
+		obj.style.opacity=1;
 		options=options || {};
 		var duration=options.duration || 800;
 		var easing=options.easing || Tween.Linear;

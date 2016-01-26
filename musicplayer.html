@@ -29,7 +29,7 @@
 		.shunx li{ position:absolute; left:0; top:0; cursor:pointer;}
 		/*泡泡*/
 		.paopao{width:300px; height:300px; position:relative; left: 0; top:0; margin-left:296px; margin-top:-516px; border-radius: 50%; }
-		.paopao div{width:16px; height:16px; position:absolute;  top:0; left:50%; margin-left: -8px; margin-top: -8px; border-radius: 50%; left:63.165px; top: 194.646px; opacity:1; background-size:100%; display:none;}
+		.paopao div{width:16px; height:16px; position:absolute;  top:0; left:50%; margin-left: -8px; margin-top: -8px; border-radius: 50%; left:63.165px; top: 194.646px; opacity:1; background-size:100%; display:none; opacity:0;}
 		.pp1{ background: url("img/pp1.png") no-repeat left top;}
 		.pp2{background: url("img/pp2.png") no-repeat left top;}
 		.pp3{background: url("img/pp3.png") no-repeat left top;}
@@ -99,8 +99,7 @@
 							//泡泡具体的运动
 				function oPmove(){
 					function run(obj1){
-						obj1.style.display='block';
-					move(obj1,{
+					Pmove(obj1,{
 						'width':52,
 						'height':52,
 						'marginLeft':-26,
@@ -108,7 +107,7 @@
 						},{
 						'duration':800,
 						'complete':function(){
-							move(obj1,{'opacity':0.3,'top':-150},{'duration':1800,'complete':function(){
+							Pmove(obj1,{'opacity':0.3,'top':-150},{'duration':1800,'complete':function(){
 								obj1.style.opacity=1;	
 								obj1.style.width='16px';
 								obj1.style.height='16px';
