@@ -1,7 +1,6 @@
 	function Pmove(obj, json, options,R)
 	{
 		obj.style.display='block';
-		obj.style.opacity=1;
 		options=options || {};
 		var duration=options.duration || 800;
 		var easing=options.easing || Tween.Linear;
@@ -25,14 +24,12 @@
 			if(R){
 				clearInterval(obj.timer1);
 				obj.timer1=setInterval(function (){
-					n++;			
-					//alert('进入'+a)
-				//	if(a < 240){  
+					n++;			 
 					a+=lar;
 					x=R+Math.sin(a2d(a))*R;
 					y=R-Math.cos(a2d(a))*R;		
 					obj.style.left=x+'px';
-					obj.style.top=y+'px';	
+					obj.style.top=y+'px';
 					for (var name in json)
 						{
 							var cur=easing(duration*n/count, start[name], dis[name], duration);
