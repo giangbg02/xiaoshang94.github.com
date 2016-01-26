@@ -8,16 +8,16 @@
 		html{height:100%;}
 		body{background:#000; width: 1120px; background: url("img/bj2.png") center center; background-size: 100% 100%; height:100%;}
 		.zzz{width: 1120px; height: 550px; overflow: hidden;}
-		.zong{position: relative; width:1120px; margin-top: 0px; margin-left: -120px; }
+		.zong{position: relative; width:1120px; margin-top: 0px; margin-left: -160px; }
 		.xiaoyus{margin-left: 350px; width: 650px; height:550px; background: url('img/xiaoyubeijing.png') no-repeat  left top; position:relative;}
 		.xiayiqu{background:url(img/xiaoyuxiayiqu.png) no-repeat; width:35px; height:35px; position:absolute; left:270px; top:37px; cursor:pointer;}
 		.shangyi{background:url(img/xiaoyushangyiqu.png) no-repeat; width:35px; height:35px; position:absolute; left:276px; top:489px; cursor:pointer;}
 		.bofang{border-radius: 50%; width:95px; height:95px; background:url('img/xiaoyusbofang.png') no-repeat center center; position:absolute; left:132px; top:202px;
-		  box-shadow:0px 0px 2px #235549,0px 0px 10px #235549,0px 0px 10px #235549,0px 0px 10px #235549,0px 0px 20px #388fa4,0px 0px 20px #388fa4; cursor:pointer;}
-		.pl{width:23px; height:22px; background:url(img/pl.png) no-repeat; margin-top:8px; border-radius: 50%;}
-		.sh{width:23px; height:23px; background:url(img/sh.png) no-repeat; margin-left:32px; margin-top:19px; border-radius: 50%;}
-		.rp{width:23px; height:22px; background:url(img/rp.png) no-repeat; margin-left:65px; margin-top:18px; border-radius: 50%;}
-		.eq{width:23px; height:23px; background:url(img/eq.png) no-repeat; margin-left:93px; border-radius: 50%;}
+		  box-shadow:0px 0px 2px #235549,0px 0px 10px #235549,0px 0px 10px #235549,0px 0px 10px #235549,0px 0px 20px #388fa4,0px 0px 20px #388fa4; cursor:pointer; z-index:3; border:none; outline:none;}
+		.pl{width:23px; height:22px; background:url(img/eq.png) no-repeat; margin-top:8px; border-radius: 50%; z-index:2;}
+		.sh{width:23px; height:23px; background:url(img/sh.png) no-repeat; margin-left:32px; margin-top:19px; border-radius: 50%; z-index:2;}
+		.rp{width:23px; height:22px; background:url(img/rp.png) no-repeat; margin-left:65px; margin-top:18px; border-radius: 50%; z-index:2;}
+		.eq{width:23px; height:23px; background:url(img/pl.png) no-repeat; margin-left:93px; border-radius: 50%; z-index:2;}
 		.jindutiao{width:194px; height:6px; background:url(img/xiaoyusjindutiao.png) no-repeat left top; position:absolute; left:244px; top:266px; border-radius:3px;}
 		.jy{width:15px; height:15px; background:url(img/jy.png) no-repeat; position:absolute; left:0; top:-5px;}
 		.music{width:107px; height:40px; position:absolute; left:250px; top:202px; color:#006f72; font-size:20px;}
@@ -28,11 +28,12 @@
 		.shunx{position:absolute; left:128px; top:290px;}
 		.shunx li{ position:absolute; left:0; top:0; cursor:pointer;}
 		/*泡泡*/
-		.paopao{width:200px; height:px; position:absolute; left: 0; top:0;}
-		.pp1{width: 32px; height: 32px; background: url("img/pp1.png") no-repeat; position: absolute;left:250px; top:280px;}
-		.pp2{width: 47px; height: 46px; background: url("img/pp2.png") no-repeat; position: absolute;left:195px; top:220px;}
-		.pp3{width: 62px; height: 62px; background: url("img/pp3.png") no-repeat; position: absolute;left:224px; top:80px;}
-		.zbl{width:265px; height: 500px; background: url("img/gequliebiao.png") no-repeat; position: absolute; left: 980px; top:48px; }
+		.paopao{width:300px; height:300px; position:relative; left: 0; top:0; margin-left:296px; margin-top:-516px; border-radius: 50%; }
+		.paopao div{width:16px; height:16px; position:absolute;  top:0; left:50%; margin-left: -8px; margin-top: -8px; border-radius: 50%; left:63.165px; top: 194.646px; opacity:1; background-size:100%;}
+		.pp1{ background: url("img/pp1.png") no-repeat left top;}
+		.pp2{background: url("img/pp2.png") no-repeat left top;}
+		.pp3{background: url("img/pp3.png") no-repeat left top;}
+		.zbl{width:265px; height: 500px; background: url("img/gequliebiao.png") no-repeat; position: absolute; left: 940px; top:48px; }
 		.zbl-p{font-family: "Microsoft Yahei"; color: #101025; line-height: 26px; margin-left: 64px; margin-top: 131px;
 		font-size: 16px; overflow: hidden; height:256px; width: 201px;}
 		.on{color:#009;}
@@ -45,6 +46,8 @@
 	</style>
 	<script src="ajax.js"></script>
 	<script src="music-js/lrczjson.js"></script>
+	<script src="music-js/move.js"></script>
+	<script src="music-js/paopaodigui.js"></script>
 	<script>
 		var arrSong=[
 			'The Sore Feet Song',
@@ -62,6 +65,68 @@
 			return parseInt(Math.random()*(m-n))+n;
 		}
 		window.onload=function(){
+		
+			/***泡泡***/
+			var oBof=document.querySelector('.bofang');
+			var oPaopao=document.querySelector('.paopao');
+			(function(){
+				var ptimer1=null;
+				var ptimer2=null;
+				var ptimer3=null;	
+				var oPn=true;
+				var R=oPaopao.offsetWidth/2;
+				var oPp1=document.querySelector('.pp1'); 
+				var oPp2=document.querySelector('.pp2');
+				var oPp3=document.querySelector('.pp3');	
+				
+				oBof.focus();
+				if(oPn){
+					oPmove()	
+				}
+				window.onfocus=function(){
+/*				*/
+					oPmove()
+				}
+				
+				window.onblur=function(){
+					 oPn=false;
+					clearInterval(ptimer1)
+					clearInterval(ptimer2)
+					clearInterval(ptimer3)
+				}
+				
+							//泡泡具体的运动
+				function oPmove(){
+					function run(obj1){
+					move(obj1,{
+						'width':52,
+						'height':52,
+						'marginLeft':-26,
+						'marginTop':-26
+						},{
+						'duration':800,
+						'complete':function(){
+							move(obj1,{'opacity':0.3,'top':-150},{'duration':1800,'complete':function(){
+								obj1.style.opacity=1;	
+								obj1.style.width='16px';
+								obj1.style.height='16px';
+								obj1.marginLeft='-8px';
+								obj1.marginTop='-8px';
+							}})
+						}
+					},R)	
+				}
+					run(oPp1)
+					run(oPp2)
+					run(oPp3)
+					ptimer1=setInterval(function(){run(oPp1)}, 3200);
+					ptimer2=setInterval(function(){run(oPp2)}, 3600);	
+					ptimer3=setInterval(function(){run(oPp3)}, 2700);			
+					
+					}	
+			})()
+		/*******/
+
 
 			var oA=document.querySelector('#a1');
 			var aA=document.querySelectorAll('.zbl-p li a');
@@ -86,7 +151,7 @@
 			var aLi=document.querySelectorAll('.shunx li');
 			aLi[0].onclick=function(){
 				sty(this);
-				oA.dataset.mode='order';
+				oA.dataset.mode='cycle';
 			};
 			aLi[1].onclick=function(){
 				sty(this);
@@ -98,7 +163,7 @@
 			};
 			aLi[3].onclick=function(){
 				sty(this);
-				oA.dataset.mode='cycle';
+				oA.dataset.mode='order';
 			};
 
 			sty(aLi[0]);
@@ -109,12 +174,12 @@
 				}
 				th.style.boxShadow='inset 0px 0px 20px rgba(0,0,0,0.4)';
 			}
-			var oBof=document.querySelector('.bofang');
+			
 
 			//播放进度条
 			var oJindu=document.querySelector('.jindutiao');
 			var oFang=document.querySelector('.jy');
-			var jdWidth=194;
+			window.jdWidth=194;
 			var fWidth=15;
 			var iJ=0;
 			
@@ -138,18 +203,15 @@
 					}
 				}
 
-			//自动同步进度
-			oA.ontimeupdate=function(){
-			
-					oFang.style.left=oA.currentTime/oA.duration*jdWidth+'px';
-					iJ=oA.currentTime;
 				
-				//进度条点击
+			
+			//进度条点击
 				oJindu.onmousedown=function(ev){
 					var oJleft=oJindu.offsetLeft+oJindu.parentNode.offsetLeft+oJindu.parentNode.parentNode.offsetLeft;
 					var Left=ev.clientX-oJleft-fWidth/2;				
 					oFang.style.left=pd(Left)+'px';
 					oA.currentTime=pd(Left)/jdWidth*oA.duration;
+
 					if(lrc_ttzz < 1){
 						lrc_too(iNow);
 						aA[iNow%10].className='on';	
@@ -160,16 +222,59 @@
 						document.onmouseup=null;
 					}
 				}
-			}
+			
 
-			function pd(left){
-				if(left<=0){
-						left=0;
-					}else if(left>=jdWidth){
-						left=jdWidth-2;
-					};
-					return left;
+			oA.onended=function(){
+														 lrc_rem=0;
+														 oLrc.innerHTML='';
+														
+														switch(oA.dataset.mode){
+															case 'order':
+																iNow++;
+																if(iNow==arrSong.length){
+																oA.pause();
+																	clear();
+																	oLrc.innerHTML='';
+																	oBof.style.background='url(img/xiaoyusbofang.png)no-repeat center center';
+																	return;
+																}else {
+																	play(iNow);
+																}
+																break;
+															case 'single':
+																play(iNow);
+																break;
+															case 'random':
+																iNow=rnd(0,arrSong.length);
+																play(iNow);
+																break;
+															case 'cycle':
+																iNow++;
+																if(iNow==arrSong.length){
+																	iNow=0;
+																}
+																play(iNow);
+																break;
+										
+															default:
+																iNow++;
+																if(iNow==arrSong.length){
+																	iNow=0;
+																}
+																play(iNow);
+																break;
+										
+														}/*判断*/
+														
 			}
+			
+			//自动同步进度
+			oA.ontimeupdate=function(){
+			
+					oFang.style.left=oA.currentTime/oA.duration*jdWidth+'px';
+					iJ=oA.currentTime;
+			}
+		
 				//播放或者暂停
 				oBof.onclick=function(){
 					bz();
@@ -181,7 +286,12 @@
 						oBof.title="暂停";
 						oBof.style.background='url(img/xiaoyuszanting.png)no-repeat center center';
 						oA.play();
-						aA[iNow].className='on';
+						if(iNow == 10){
+							aA[iNow-1].className='on';
+							lrc_too(iNow-1);		
+						}else{
+							aA[iNow].className='on';
+						}
 						//创建歌词避免暂停再开始多余的运动，也避免和进度条拖拽和点击重复
 						if(lrc_ttzz < 1){
 							lrc_too(iNow);		
@@ -344,6 +454,16 @@
 					}
 							
 };
+
+			function pd(left){
+				if(left<=0){
+						left=0;
+					}else if(left>=jdWidth){
+						left=jdWidth-2;
+					};
+					return left;
+			}
+
 	</script>
 </head>
 <body>
@@ -360,7 +480,7 @@
 			</div>
 
 			<div class="xiayiqu"></div>
-			<div class="bofang" title="播放"></div>
+			<input type="button" class="bofang" title="播放">
 			<div class="shangyi"></div>
 			<div class="jindutiao">
 				<div class="jy"></div>
@@ -369,10 +489,10 @@
 				<h2>My plaear</h2>
 			</div>
 			<ul class="clearfix shunx">
-				<li class="pl" title="顺序播放"></li>
+				<li class="pl" title="循环列表"></li>
 				<li class="sh" title="单曲循环"></li>
 				<li class="rp" title="随机播放"></li>
-				<li class="eq" title="循环列表"></li>
+				<li class="eq" title="顺序播放"></li>
 			</ul>
 			<div class="geci">
 			</div>

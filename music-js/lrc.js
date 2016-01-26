@@ -115,51 +115,7 @@
 												}
 												
 												//播放完毕后数据初始化，避免oLrc.removeChild报错
-													oA.onended=function(){
-														 lrc_rem=0;
-														 oLrc.innerHTML='';
-														
-														switch(oA.dataset.mode){
-															case 'order':
-																iNow++;
-																if(iNow==arrSong.length){
-																	oA.pause();
-																	clear();
-																	return;
-																}else {
-																	play(iNow);
-																}
-																break;
-															case 'single':
-																play(iNow);
-																break;
-															case 'random':
-																iNow=rnd(0,arrSong.length);
-																play(iNow);
-																break;
-															case 'cycle':
-																iNow++;
-																if(iNow==arrSong.length){
-																	iNow=0;
-																}
-																play(iNow);
-																break;
-										
-															default:
-																iNow++;
-																if(iNow==arrSong.length){
-																	oA.pause();
-																	clear();
-																	oLrc.innerHTML='';
-																	return;
-																}else {
-																	play(iNow);
-																}
-																break;
-										
-														}/*判断*/
-														
-													}
+													
 											}
 								//		}	
 												
