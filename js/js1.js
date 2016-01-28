@@ -145,15 +145,6 @@ window.onload=function(){
 			};
 			
 		
-		
-		window.onfocus=function(){	
-			oDiv.timer1=setInterval(next,3000)	
-		}
-				
-		window.onblur=function(){
-				clearInterval(oDiv.timer1)
-		}
-		
 		oDiv.timer1=setInterval(next,3000)
 		
 		oDiv.onmouseover=function(){
