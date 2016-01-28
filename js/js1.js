@@ -16,6 +16,9 @@ window.onload=function(){
 			})(i)
 		}
 
+
+
+
 		// 轮播淡入淡出
 	function picture_pre(arr){
 		var newimages=[];
@@ -141,6 +144,15 @@ window.onload=function(){
 				}
 			};
 			
+		
+		
+		window.onfocus=function(){	
+			oDiv.timer1=setInterval(next,3000)	
+		}
+				
+		window.onblur=function(){
+				clearInterval(oDiv.timer1)
+		}
 		
 		oDiv.timer1=setInterval(next,3000)
 		
