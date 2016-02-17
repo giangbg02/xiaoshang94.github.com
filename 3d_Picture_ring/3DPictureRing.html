@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>3D图片环实验</title>
+    <link href="css/base.css" type="text/css" rel="stylesheet">
+    <style>
+      body{
+          background: #000;
+      }
+      #ul1{
+          width:133px;
+          height: 200px;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          margin-top: -100px;
+          margin-left: -66px;
+
+          transform: perspective(1200px) rotateX(-10deg);
+          transform-style: preserve-3d;
+      }
+      #ul1 li{
+          width:100%;
+          height:100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+
+          transition: 1s all ease;
+
+          box-shadow: 0 0 10px 2px #fff;
+          border-radius: 5px;
+
+          -webkit-box-reflect: below 10px -webkit-linear-gradient(rgba(255,255,255,0) 40%, rgba(255,255,255,0.5));
+      }
+    </style>
+	<script src="js/js.js"></script>
+</head>
+<body>
+<ul class="ul1" id="ul1">
+</ul>
+</body>
+</html>
