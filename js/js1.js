@@ -18,7 +18,7 @@ ready(function(){
 		}
 
 
-
+window.onload=function(){
 
 		// 轮播淡入淡出
 	function picture_pre(arr){
@@ -47,7 +47,7 @@ ready(function(){
 				oSpan.className='b2-r-span';
 				oDiv.appendChild(oSpan);
 				
-		//window.onload=function(){
+		
 				//轮播圆点对应图片    .b2-r-ul li:hover{background: #a9806c;}
 				var oUl_y=document.getElementById('b2-r-ul');
 				var aLi_y=oUl_y.getElementsByTagName('li');
@@ -196,7 +196,7 @@ ready(function(){
 			}
 		
 			 picture_pre(['img/mg0c.jpg','img/mg1c.jpg','img/mg4c.jpg','img/mg2c.jpg','img/mg10c.jpg']) 
-	//}
+	}
 	
 
 
