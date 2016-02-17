@@ -1,5 +1,21 @@
 // JavaScript Document
 
+function ready(fn)
+{
+	if(document.addEventListener)
+	{
+		document.addEventListener('DOMContentLoaded',fn,false);
+	}	
+	else
+	{
+		document.onreadystatechange=function(){
+			if(document.readyState == 'complete')
+			{
+				fn();
+			}	
+		}	
+	}
+}
 
 function sou_open(oSou_di,oTdata){
 	switch(oSou_di.children[0].className){
