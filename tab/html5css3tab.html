@@ -1,0 +1,270 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>html5css3选项卡</title>
+	<link rel="stylesheet" href="css/base.css">
+   <style>
+   .box{width:700px; height:400px; margin:50px auto; position:relative; background:url(img/0.jpg) no-repeat;}
+   .box span{position:absolute; transform-style:preserve-3d;}
+   .box span em{position:absolute; left:0; top:0; width:100%; height:100%;}
+   .box span .front{background:url(img/0.jpg) no-repeat; transform:transLateZ(1px);}
+   .box span .back{background:url(img/1.jpg) no-repeat; transform:transLateZ(-1px) scale(-1,1);}
+   .bot{height:50px; position:relative; margin:0 auto; width:500px;}
+	.keli{width:100px; height:46px; position:absolute; left:120px; top:0px; font-size:24px; color:#fff; background:#727272}
+	
+	.page{width:50%; height:100%; position:absolute; right:0; top:0; transform-origin:left center; transform-style:preserve-3d; z-index:3; transition:1s all ease; transform:perspective(800px) rotateY(0deg); }
+	.page div{width:100%; height:100%; position:absolute; left:0; top:0;}
+	.front{ z-index:2; backface-visibility:hidden; background:url(img/0.jpg) no-repeat right top;}
+	.back{transform:scale(-1,1); background:url(img/1.jpg) no-repeat left top; z-index:1;}
+	.page2{width:50%; height:100%; position:absolute; right:0; top:0;  background:url(img/1.jpg) no-repeat right top;}
+	.fanye{width:100px; height:46px; position:absolute; left:0; top:0px; font-size:24px; color:#fff; background:#727272}
+	
+  html,body{height:100%; overflow: hidden;}
+  .baozha{width:100px; height:46px; position:absolute; left:240px; top:0px; font-size:24px; color:#fff; background:#727272}
+  
+
+   .left{background:url("img/0.jpg"); transform: translateZ(350px); text-align: center; width: 700px; height: 400px; position: absolute; left: 0; top:0; opacity: 1;}
+    .right{background:url("img/1.jpg"); transform: translateX(350px) rotateY(90deg); text-align: center; width: 700px; height: 400px; position: absolute; left: 0; top:0; opacity: 1;}
+  .lifangti{width:100px; height:46px; position:absolute; left:360px; top:0px; font-size:24px; color:#fff; background:#727272; }
+	 </style>
+    <script>
+	function rnd(n,m){
+            return parseInt(Math.random()*(m-n)+n);
+        }
+        window.onload=function(){
+            var oBox=document.querySelector('.box');
+			var k_oBtn=document.querySelector('.keli');
+			var bReady=true;
+	    	var iNow=0;
+			 var oBtn=document.querySelector('.fanye');
+			 var bz_oBtn=document.querySelector('.bot .baozha')
+				var oPage=null;
+				 var oPage2=null;
+				 var oFront=null;
+				 var oBack=null;
+				 var divC=oBox.offsetWidth/2;
+				 //翻页点击
+				oBtn.onclick=function(){ 
+				
+					if(bReady == false){
+						return ;
+					}
+					bReady=false;
+					clear()
+					j_fanye()
+					
+					setTimeout(function(){
+					iNow++;
+					oPage.style.transition='1s all ease';
+					oPage.style.transform='perspective(800px) rotateY(-180deg)';
+					function tEnd(){
+						oPage.style.transition='none';
+						oPage.style.transform='perspective(800px) rotateY(0deg)';
+						oBox.style.background='url(img/'+iNow%4+'.jpg)  no-repeat';
+						oFront.style.background='url(img/'+iNow%4+'.jpg) no-repeat right top';
+						oBack.style.background='url(img/'+(iNow+1)%4+'.jpg) no-repeat';
+						oPage2.style.background='url(img/'+(iNow+1)%4+'.jpg) no-repeat right top';	
+						oPage.removeEventListener('transitionend',tEnd,false);
+						bReady=true;
+					}
+					oPage.addEventListener('transitionend',tEnd,false);	
+					},30)
+					
+			}	
+			
+				//颗粒翻转
+				 //点击
+				k_oBtn.onclick=function(){
+					if(bReady == false){
+						return;
+					}
+					bReady=false;
+					oBox.style.background='none';
+					clear()
+					j_keli();
+					
+					setTimeout(function(){
+						
+						var aSpan=oBox.children;
+						iNow++;
+						for(var i=0; i<aSpan.length; i++){
+							var delayTime=(parseInt(aSpan[i].dataset.r)+parseInt(aSpan[i].dataset.c))*200;
+							aSpan[i].style.transition='.4s all ease '+delayTime+'ms';
+							aSpan[i].style.transform='perspective(800px) rotateY(180deg)';
+						}
+						
+						//最后一个运动结束
+						 aSpan[aSpan.length-1].addEventListener('transitionend',tEnd,false)
+						function tEnd(){
+							for(var i=0; i<aSpan.length; i++){
+								aSpan[i].style.transition='none';
+								aSpan[i].style.transform='perspective(800px) rotateY(0deg)';
+								
+								//换图
+								aSpan[i].children[0].style.backgroundImage='url(img/'+iNow%4+'.jpg)';
+								aSpan[i].children[1].style.backgroundImage='url(img/'+(iNow+1)%4+'.jpg)';
+							}
+							bReady=true;
+						}
+					},30)
+				}
+				
+				
+           //爆炸
+            bz_oBtn.onclick=function(){
+				  if(bReady == false){
+                    return;
+                }
+                bReady=false;
+			 	clear()
+				j_bz()
+				setTimeout(function(){
+                var aSpan=oBox.children;
+                iNow++;
+                for(var i=0; i<aSpan.length; i++){
+                    aSpan[i].style.transition='1s all ease';
+					
+                    var x=aSpan[i].offsetWidth/2+aSpan[i].offsetLeft-divC;
+                    var y=aSpan[i].offsetHeight/2+aSpan[i].offsetTop-oBox.offsetHeight/2;
+
+                    aSpan[i].style.transform='perspective(800px) translate3d('+x+'px,'+y+'px,0) scale(1.2) rotateX('+rnd(-180,180)
+                    +'deg) rotateY('+rnd(-180,180)+'deg)';
+                    aSpan[i].style.opacity=0;
+
+                }
+                aSpan[0].addEventListener('transitionend',tEnd,false)
+                function tEnd(ev){
+                  if(ev.propertyName == 'opacity'){
+                        for(var i=0; i<aSpan.length; i++){
+                            aSpan[i].style.transition='none';
+                            aSpan[i].style.transform='perspective(800px) translate3d(0,0,0) scale(1) rotateX(0deg) rotateY(0deg)';
+                            aSpan[i].style.opacity=1;
+                            aSpan[i].style.backgroundImage='url(img/'+iNow%4+'.jpg)';
+                            oBox.style.backgroundImage='url(img/'+(iNow+1)%4+'.jpg)';
+
+                        }
+                      aSpan[0].removeEventListener('transitionend',tEnd,false)
+                      bReady=true;
+                  }
+                }
+				},30)
+            }
+				
+				
+			//立方体
+			
+			var oLift=document.querySelector('.lifangti');
+
+            oLift.onclick=function(){
+              	 if(bReady == false){
+						return ;
+					}
+					bReady=false;
+				oBox.style.transformStyle='preserve-3d';
+               setTimeout(function(){
+				   oBox.style.transform='perspective(800px) scale3d(0.6955,0.6955,0.6955) rotateY(0deg)';
+                   oBox.innerHTML=' <div class="left"></div><div class="right"></div>';
+                   var oLeft=document.querySelector('.left');
+                   var oRight=document.querySelector('.right');
+                   oLeft.style.backgroundImage='url(img/'+iNow%4+'.jpg)';
+                   oRight.style.backgroundImage='url(img/'+(iNow+1)%4+'.jpg)';
+                   iNow++;
+                   oBox.style.transition='1s all ease';
+                   oBox.style.transform='perspective(800px) scale3d(0.6955,0.6955,0.6955) rotateY(-90deg)';
+
+                   oBox.addEventListener('transitionend',tEnd,false)
+                   function tEnd(){
+                       oBox.style.transition='none';
+                       oBox.style.transform='perspective(800px) scale3d(0.6955,0.6955,0.6955) rotateY(0deg)';
+                       oLeft.style.backgroundImage='url(img/'+iNow%4+'.jpg)';
+                       oRight.style.backgroundImage='url(img/'+(iNow+1)%4+'.jpg)';
+                       oBox.removeEventListener('transitionend',tEnd,false)
+					   bReady=true;
+                   }
+               },30)
+            }
+			
+			function clear(){
+				oBox.style.transform='';
+				oBox.style.transformStyle='';
+				oBox.innerHTML='';	
+			}
+				
+				function j_fanye(){
+						oPage=document.createElement('div');
+						oPage2=document.createElement('div');
+						oPage.className='page';
+						oPage.innerHTML='<div class="front"></div><div class="back"></div>';
+						oPage2.className='page2';
+						oBox.appendChild(oPage);
+						oBox.appendChild(oPage2);
+						oFront=document.querySelector('.front');
+						oBack=document.querySelector('.back');
+						oBox.style.background='url(img/'+iNow%4+'.jpg)  no-repeat';
+						oFront.style.background='url(img/'+iNow%4+'.jpg) no-repeat right top';
+						oBack.style.background='url(img/'+(iNow+1)%4+'.jpg) no-repeat';
+						oPage2.style.background='url(img/'+(iNow+1)%4+'.jpg) no-repeat right top';	
+			}
+			
+			function j_keli(){
+					var R=4;
+					var C=7;
+					for(var r=0; r<R; r++){
+						for(var c=0; c<C; c++){
+							var oSpan=document.createElement('span');
+							oSpan.style.width=oBox.offsetWidth/C+'px';
+							oSpan.style.height=oBox.offsetHeight/R+'px';
+							oBox.appendChild(oSpan);
+							oSpan.style.left=c*oSpan.offsetWidth+'px';
+							oSpan.style.top=r*oSpan.offsetHeight+'px';
+							
+							//给span加面
+							oSpan.innerHTML='<em class="front"></em><em class="back"></em>';
+							oSpan.children[0].style.backgroundPosition=-c*oSpan.offsetWidth+'px '+-r*oSpan.offsetHeight+'px';
+							oSpan.children[1].style.backgroundPosition=-c*oSpan.offsetWidth+'px '+-r*oSpan.offsetHeight+'px';
+							
+							oSpan.dataset.r=r;
+							oSpan.dataset.c=c;
+						}
+					}
+					var aSpan=oBox.children;
+					for(var i=0; i<aSpan.length; i++){
+						aSpan[i].children[0].style.backgroundImage='url(img/'+iNow%4+'.jpg)';
+						aSpan[i].children[1].style.backgroundImage='url(img/'+(iNow+1)%4+'.jpg)';
+					}
+			} 
+			
+			function j_bz(){
+				
+				var R=4;
+				var C=7;
+				for(var r=0; r<R; r++){
+					for(var c=0; c<C; c++){
+						var oSpan=document.createElement('span');
+						oSpan.style.width=oBox.offsetWidth/C+'px';
+						oSpan.style.height=oBox.offsetHeight/R+'px';
+						oBox.appendChild(oSpan);
+						oSpan.style.left=c*oSpan.offsetWidth+'px';
+						oSpan.style.top=r*oSpan.offsetHeight+'px';
+						oSpan.style.backgroundPosition='-'+c*oSpan.offsetWidth+'px -'+r*oSpan.offsetHeight+'px';
+						oSpan.style.backgroundImage='url(img/'+iNow%4+'.jpg)';
+                         oBox.style.backgroundImage='url(img/'+(iNow+1)%4+'.jpg)';
+					}
+				}	
+			}
+        };
+			
+   </script>
+</head>
+<body>
+    <div class="box">
+	</div>
+	 <div class="bot">
+        <input type="button" value="翻页" class="fanye"/>
+        <input type="button" value="翻转" class="keli"/>
+        <input type="button" value="爆炸" class="baozha"/>
+		<input type="button" value="立方体" class="lifangti"/>
+    </div>
+</body>
+</html>
