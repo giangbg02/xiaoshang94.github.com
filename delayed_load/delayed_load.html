@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>图片延迟加载</title>
+<style>
+* { margin:0; padding:0; }
+ul { overflow:hidden; width:1000px; margin:0 auto;}
+li { float:left; width:300px; height:300px; border:1px solid red; list-style:none; margin:10px; }
+img { display:block; width:100%; }
+</style>
+<script>
+window.onload=window.onscroll=window.onresize=function (){
+	var aImg=document.getElementsByTagName('img');
+	var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+	var clientBottom=document.documentElement.clientHeight+scrollTop;
+	
+	for (var i=0; i<aImg.length; i++)
+	{
+		if (aImg[i].offsetTop < clientBottom)
+		{
+			// aImg[i] 在可视区内
+			var src=aImg[i].getAttribute('_src');
+			aImg[i].src=src;
+		}
+	}
+};
+</script>
+</head>
+
+<body>
+	<ul>
+		<li>
+			<img _src="images/m1.jpg" />
+		</li>
+		<li>
+			<img _src="images/m2.jpg" />
+		</li>
+		<li>
+			<img _src="images/m3.jpg" />
+		</li>
+		<li>
+			<img _src="images/m4.jpg" />
+		</li>
+		<li>
+			<img _src="images/m5.jpg" />
+		</li>
+		<li>
+			<img _src="images/m6.jpg" />
+		</li>
+		<li>
+			<img _src="images/m7.jpg" />
+		</li>
+		<li>
+			<img _src="images/m8.jpg" />
+		</li>
+		<li>
+			<img _src="images/m9.jpg" />
+		</li>
+		<li>
+			<img _src="images/m10.jpg" />
+		</li>
+		<li>
+			<img _src="images/m11.jpg" />
+		</li>
+		<li>
+			<img _src="images/m12.jpg" />
+		</li>
+		<li>
+			<img _src="images/m13.jpg" />
+		</li>
+		<li>
+			<img _src="images/m14.jpg" />
+		</li>
+		<li>
+			<img _src="images/m15.jpg" />
+		</li>
+		<li>
+			<img _src="images/m16.jpg" />
+		</li>
+		<li>
+			<img _src="images/m17.jpg" />
+		</li>
+		<li>
+			<img _src="images/m18.jpg" />
+		</li>
+	</ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

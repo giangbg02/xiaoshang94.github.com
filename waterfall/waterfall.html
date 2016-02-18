@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>瀑布流</title>
+<style>
+* { margin:0; padding:0; }
+.box { overflow:hidden; width:1000px; margin:0 auto; }
+ul { float:left; width:300px; margin:10px; color:#fff; }
+li { list-style:none; background:#ccc; height:150px; margin:10px 0; font-size:50px; text-align:center; font-weight:bold; }
+
+#div1 { display:none; height:150px; background:#ccc; font-size:100px; text-align:center; font-weight:bold; color:#fff; }
+</style>
+<script>
+window.onload=function (){
+	// 创建次数
+	var n=0;
+	// 颜色
+	var arr=['#fcf', '#ccf', '#cfc', '#fcc', 'cff'];
+	
+	// 变成真的数组
+	var aTmp=document.getElementsByTagName('ul');
+	var aUl=[];
+	for (var i=0; i<aTmp.length; i++)
+	{
+		aUl.push(aTmp[i]);
+	}
+	
+	// 默认第一次加载
+	createLi();
+
+
+	// 页面高度
+	var clientHeight=document.documentElement.clientHeight;
+	
+	window.onscroll=function (){
+		var height=document.body.offsetHeight;
+		var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+		
+		if (height-300 <= scrollTop+clientHeight)
+		{
+			// 到底了
+			console.log('到底了');
+			createLi();
+		}
+	};
+
+	
+	function createLi()
+	{
+		n++;
+		
+		if (n > 5)
+		{
+			var oDiv=document.getElementById('div1');
+			oDiv.style.display='block';
+			return;
+		}
+		
+		for (var i=0; i<20; i++)
+		{
+			var oLi=document.createElement('li');
+			oLi.style.height=rnd(100, 300)+'px'; // *
+			oLi.style.background=arr[n-1];
+			oLi.innerHTML=i;
+			
+			// 找最短
+			aUl.sort(function (ul1, ul2){
+				return ul1.offsetHeight-ul2.offsetHeight;
+			});
+			
+			aUl[0].appendChild(oLi);
+		}
+	}
+	
+	
+	
+	function rnd(n, m)
+	{
+		return Math.floor(Math.random()*(m-n)+n);
+	}
+};
+</script>
+</head>
+
+<body>
+	<div class="box">
+		<ul></ul>
+		<ul></ul>
+		<ul></ul>
+	</div>
+	
+	<div id="div1">
+		页码
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
