@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>map</title>
+    <meta name="viewport" content="width=320"/>
+    <style>
+        body{
+            text-align: center;
+        }
+        #div1{
+            width:80%;
+            height:300px;
+            margin: 10px auto;
+            border: 1px solid #000;
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3"></script>
+    <script>
+        window.onload=function(){
+            var oT=document.getElementById('t1');
+            var oBtn=document.getElementById('btn1');
+
+            //1. 生成地图
+            var map = new BMap.Map("div1");
+            //2. 设置中心点
+            var point=new BMap.Point(116.364375,40.099602)
+
+            map.centerAndZoom(point,15);
+
+            //3. 添加标注
+            var marker=new BMap.Marker(point);
+            map.addOverlay(marker);
+
+            map.enableScrollWheelZoom(true);
+
+
+            //周边搜索
+            oBtn.onclick=function(){
+                var local=new BMap.LocalSearch(map, {
+                    renderOptions:{map: map}
+                });
+
+                local.searchNearby(oT.value, point);
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+    <input type="text" placeholder="请输入您想搜索的地方" id="t1"/>
+    <input type="button" id="btn1" value="搜索"/>
+</body>
+</html>
