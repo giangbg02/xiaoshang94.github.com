@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="button/html; charset=utf-8" />
+<title>jquery选项卡3</title>
+    <link href="css/base.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<script src="js/jquery-1.12.1.min.js"></script>
+<script>
+$(function(){
+    var iNow=0;
+    $(".div1>input").click(function(){
+        $(".div1>input").removeClass("btn")
+        $(".div2>div").removeClass("tab_div")
+        var index=$(this).index();
+        $(this).addClass("btn")
+        $(".div2>div:eq("+index+")").addClass("tab_div")
+    });
+    $(".tab").mouseover(function(){
+        clearInterval(timer)
+    })
+    $(".tab").mouseout(function(){
+        timer=setInterval($.showTab,1000)
+    })
+
+    $.extend({
+        showTab:function(){
+            $(".div1>input").removeClass("btn")
+            $(".div2>div").removeClass("tab_div")
+            $(".div1>input:eq("+iNow%3+")").addClass("btn")
+            $(".div2>div:eq("+iNow%3+")").addClass("tab_div")
+            iNow++;
+        }
+    })
+    var timer=setInterval($.showTab,1000);
+
+})
+</script>
+</head>
+
+<body>
+<div class="tab">
+    <div class="div1 clearfix">
+        <input type="button" class="btn"/><input type="button"/><input type="button"/>
+    </div>
+    <div class="div2">
+        <div class="tab_div">
+            <img src="img/0.jpg" alt=""/>
+        </div>
+        <div>
+            <img src="img/1.jpg" alt=""/>
+        </div>
+        <div>
+            <img src="img/2.jpg" alt=""/>
+        </div>
+    </div>
+</div>
+</body>
+</html>

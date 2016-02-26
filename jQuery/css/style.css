@@ -1,0 +1,30 @@
+
+.tab{
+    width: 700px;
+    margin: 0 auto;
+}
+.div1{
+    width: 330px;
+    margin: 50px auto 10px;
+}
+.div1 input{
+    width: 100px;
+    height: 40px;
+    background: #cccccc;
+    float: left;
+    margin-right: 10px;
+}
+.div1 .btn{
+    background: red;
+}
+.div2{
+    width: 700px;
+    height: 400px;
+    margin: 0 auto;
+}
+.div2 div{
+    display: none;
+}
+.div2 .tab_div{
+    display: block;
+}
