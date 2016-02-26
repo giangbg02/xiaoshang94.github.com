@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>show</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            text-align: center;
+            background: #000;
+        }
+        input{
+            border: 1px solid #000;
+            padding: 10px 20px;
+            margin-top: 100px;
+        }
+        ul{
+            width:300px;
+            height:300px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -150px;
+        }
+        ul li{
+			margin-top:20px;
+            width:100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border: 1px solid #eee;
+            background: #3ac;
+            font-size: 80px;
+            font-weight: bolder;
+            font-family: 微软雅黑;
+            text-align: center;
+            line-height: 300px;
+            color: #fff;
+            text-shadow: 1px 1px 4px #000;
+            opacity: 0;
+
+            transition: 1s all ease;
+
+            -webkit-box-reflect: below 10px -webkit-linear-gradient(rgba(255,255,255,0) 50%, rgba(255,255,255,0.5));
+        }
+        .l2{
+            opacity: 0;
+            transform:perspective(800px) translateX(-280px) rotateY(60deg);
+            z-index: 1;
+        }
+        .l1{
+            opacity: 0.8;
+            transform:perspective(800px) translateX(-200px) rotateY(60deg);
+            z-index: 2;
+        }
+        .cur{
+            opacity: 1;
+            z-index: 5;
+        }
+        .r1{
+            opacity: 0.8;
+            transform:perspective(800px) translateX(200px) rotateY(-60deg);
+            z-index: 2;
+        }
+        .r2{
+            opacity: 0;
+            transform:perspective(800px) translateX(280px) rotateY(-60deg);
+            z-index: 1;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var oPrev=document.getElementById('prev');
+            var oNext=document.getElementById('next');
+            var aLi=document.querySelectorAll('ul li');
+
+            var aClass=[];
+
+            var bClick=false;
+
+            for(var i=0; i<aLi.length; i++){
+                aClass[i]=aLi[i].className;
+            }
+
+            function tab(){
+                for(var i=0; i<aLi.length; i++){
+                    aLi[i].className=aClass[i];
+                }
+
+                var oCur=document.querySelector('.cur');
+                function tEnd(){
+                    bClick=false;
+                    oCur.removeEventListener('transitionend',tEnd,false);
+                }
+                oCur.addEventListener('transitionend',tEnd,false);
+            }
+            //点击
+            oPrev.onclick=function(){
+                if(bClick==true)return;
+                bClick=true;
+                aClass.unshift(aClass.pop());
+
+                tab();
+            };
+
+            oNext.onclick=function(){
+                if(bClick==true)return;
+                bClick=true;
+
+                aClass.push(aClass.shift());
+
+                tab();
+            };
+        };
+    </script>
+</head>
+<body>
+    <input type="button" value="←" id="prev"/>
+    <input type="button" value="→" id="next"/>
+    <ul>
+        <li class="l2">0</li>
+        <li class="l1">1</li>
+        <li class="cur">2</li>
+        <li class="r1">3</li>
+        <li class="r2">4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+    </ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

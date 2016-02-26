@@ -1,0 +1,26 @@
+*{margin:0; padding:0;list-style:none;}
+html{font-size:20px;}
+#box{width:16rem;font-size:20px;color:#fff;}
+.top{width:100%;background:#ce4646;}
+header{width:calc(100% - 2rem);padding:20px 1rem;}
+header p{float:left;}
+header ul{float:right;}
+header ul li{float:left;padding:0 0.25rem;}
+header div{display:none;}
+.logo{width:100%;text-align:center;padding:1rem 0;}
+.logo span{border:1px solid #fff;padding:5px;box-shadow:0px 0px 1px 1px #fff;}
+section{width:100%;color:#000;}
+section ul{width:calc(100% - 2rem);padding:1rem;}
+section ul li{width:50%;float:left;margin-bottom:0.7rem;}
+section ul li h3{padding-bottom:0.2rem;}
+footer{width:100%;text-align:center;color:#ccc;clear:both;font-size:16px;padding:0.1rem 0;}
+ @media(min-width:320px) and (max-width:900px){
+ 	#box{font-size:16px;}
+	section ul li{clear:left;width:100%;}
+	header{position:relative;}
+	header ul{display:none;position:absolute;top:50px;right:20px;}
+	header ul li{clear:left;line-height:24px;width:100px;border:1px solid #fff;text-align:center;margin-top:-1px;}
+	header div{float:right;display:block;padding:3px 10px;border:1px solid #fff;border-radius:2px;}
+	footer{font-size:12px;}
+	.logo img{width:150px;}
+ }

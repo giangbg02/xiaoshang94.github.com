@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)http://fmenghai.github.io/gu_index.html -->
+<html lang="en" style="font-size: 78.9375px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<title>responsive</title>
+	<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+	<script>
+		;(function(win,doc){
+		function change(){
+			document.documentElement.style.fontSize=document.documentElement.clientWidth/16+'px';	
+		}	
+		doc.addEventListener('DOMContentLoaded',change,false);	
+		win.addEventListener('resize',change,false);
+	})(window,document);
+	window.onload=function(){
+		var oBtn=document.querySelector('#btn');
+		var oUl=document.querySelector('#ul1');
+		var bFlag=false;
+		oBtn.onclick=function(){
+			bFlag=!bFlag;
+			if(bFlag==true){
+				oUl.style.display='block';
+			}else{
+				oUl.style.display='none';
+			}
+			
+		}
+	}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<div class="top">
+			<header>
+				<p>Gulp中文网</p>
+				<ul id="ul1">
+					<li>首页</li>
+					<li>中文文档</li>
+					<li>入门指南</li>
+					<li>API</li>
+					<li>插件开发</li>
+					<li>常见问题</li>
+					<li>使用技巧</li>
+				</ul>
+				<div id="btn">=</div>
+			</header>
+			<div class="logo">
+				<img src="img/logo.jpg">
+				<p>用自动化构建工具增强你的工作流程！</p><br>
+				<span>开始使用</span>
+			</div>
+		</div>
+		<section>
+			<ul>
+				<li>
+					<h3>易于使用</h3>
+					<p>通过代码优于配置的策略，Gulp让简单的任务简单，复杂的任务可管理</p>
+				</li>
+				<li>
+					<h3>构建快速</h3>
+					<p>通过代码优于配置的策略，Gulp让简单的任务简单，复杂的任务可管理</p>
+				</li>
+				<li>
+					<h3>插件高质</h3>
+					<p>通过代码优于配置的策略，Gulp让简单的任务简单，复杂的任务可管理</p>
+				</li>
+				<li>
+					<h3>易于学习</h3>
+					<p>通过代码优于配置的策略，Gulp让简单的任务简单，复杂的任务可管理</p>
+				</li>
+			</ul>
+		</section>
+		<footer>
+			<p>©Gulp 中文网 2015</p><br>
+			<p>京ICP备1108151号 | 京公安网安备1101001092299</p>
+		</footer>
+	</div>
+
+</body></html>
