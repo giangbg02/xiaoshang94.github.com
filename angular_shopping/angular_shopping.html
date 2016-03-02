@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>angular_shopping</title>
+    <style>
+    </style>
+    <script src="angular.js"></script>
+    <script>
+        var app=angular.module('app',[]);
+
+        app.controller('goCar',function($scope){
+            $scope.data=[
+                {name:'钢笔',count:3, price:20},
+                {name:'毛笔',count:1, price:50},
+                {name:'铅笔',count:5, price:6},
+                {name:'水彩笔',count:11, price:50.12},
+            ];
+
+            $scope.sum=function(){
+                var res=0;
+
+                angular.forEach($scope.data,function(value,key){
+                    res+=value.price*value.count;
+                });
+                return res;
+            };
+        });
+
+    </script>
+</head>
+<body>
+    <div ng-controller="goCar">
+        <dl ng-repeat="item in data">
+            <dt>商品名称:
+                <strong>{{item.name}}</strong>
+            </dt>
+            <dd>
+                <span>商品数量:<input type="number" ng-model="item.count"> </span><br/>
+                <span>商品单价:{{item.price|currency:'￥'}}</span>
+                <span>商品总价:{{item.price*item.count|currency:'￥'}}</span>
+            </dd>
+        </dl>
+
+        <div>总计:{{sum()|currency:'￥'}}</div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
